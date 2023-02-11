@@ -25,17 +25,15 @@ class Conversation {
     input.nextLine();
     System.out.println("Hi there! What's on your mind?");
 
-    //String[] transcript = new String[2 * numOfRounds + 1];
-    //transcript[0] = "Hi there! What's on your mind?";
-    //int nextIndex = 1;
+    String[] transcript = new String[2 * numOfRounds + 1];
+    transcript[0] = "Hi there! What's on your mind?";
+    int nextIndex = 1;
 
     for (int i = 1; i <= numOfRounds; i++)
     {
       String userInput = input.nextLine();
       // userInput = userInput.replace(".", "?");
       String response = "";
-      //transcript[nextIndex] = userInput;
-      //nextIndex++;
 
       if (userInput.contains("I am"))
       {
@@ -72,17 +70,19 @@ class Conversation {
       }
 
 
-      System.out.println(response);
-      //transcript[nextIndex] = response;
-      //nextIndex++;
+      System.out.println(response.substring(0, response.length() - 1) + "?");
+      transcript[nextIndex] = userInput;
+      nextIndex++;
+      transcript[nextIndex] = response.substring(0, response.length() - 1) + "?";
+      nextIndex++;
 
     }
 
     System.out.println("Goodbye! Here is a transcript of our conversation:");
-    //for (int i = 0; i < transcript.length; i++) 
-    //{
-     // System.out.println(transcript[i]);
-    //}
+    for (int n = 0 ; n < transcript.length; n++) 
+    {
+      System.out.println(transcript[n]);
+    }
     input.close();
   }
 }
