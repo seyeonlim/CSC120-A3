@@ -1,88 +1,63 @@
 import java.util.Scanner;
 import java.util.Random;
 
-class Conversation {
-
-  public static void main(String[] arguments) 
-  {
-  
-    Scanner input = new Scanner(System.in);
-    Random random = new Random(); //generates random numbers
-
-    String[] cannedPhrases =
-    {
-      "I see.",
-      "That's interesting!",
-      "Mmm-hm.",
-      "Ah-ha.",
-      "Uh-huh.",
-      "I understand.",
-      "OK."
+public class Conversation {
+    private static String[] cannedPhrases = {
+        "I see.",
+        "That's interesting!",
+        "Mmm-hm.",
+        "Ah-ha.",
+        "Uh-huh.",
+        "I understand.",
+        "OK."
     };
 
-    System.out.println("Choose a number of rounds of conversation.");
-    int numOfRounds = input.nextInt();
-    input.nextLine();
-    System.out.println("Hi there! What's on your mind?");
+    private static String getResponse(String input) {
+        String response = input.replace("i am", "You are");
+        response = response.replace("I am", "You are");
+        response = response.replace("i'm", "You're");
+        response = response.replace("I'm", "You're");
+        response = response.replace("im", "You're");
+        response = response.replace("Im", "You're");
+        response = response.replace("me", "you");
+        response = response.replace("you", "I");
+        response = response.replace("my", "your");
+        response = response.replace("your", "my");
 
-    String[] transcript = new String[2 * numOfRounds + 1];
-    transcript[0] = "Hi there! What's on your mind?";
-    int nextIndex = 1;
+        if (response.contains("You're") || response.contains("You are") || response.contains("I") || response.contains("your") || response.contains("my")) {
+            response = response.substring(0, response.length() - 1) + "?";
+        }
 
-    for (int i = 1; i <= numOfRounds; i++)
-    {
-      String userInput = input.nextLine();
-      // userInput = userInput.replace(".", "?");
-      String response = "";
-
-      if (userInput.contains("I am"))
-      {
-        response = userInput.replaceFirst("I am", "You are");
-      }
-      else if (userInput.contains("I'm"))
-      {
-        response = userInput.replaceFirst("I'm", "You're");
-      }
-      else if (userInput.contains("I"))
-      {
-        response = userInput.replaceFirst("I", "You");
-      }
-      else if (userInput.contains("me"))
-      {
-        response = userInput.replaceFirst("me", "you");
-      }
-      else if (userInput.contains("you"))
-      {
-        response = userInput.replaceFirst("you", "I");
-      }
-      else if (userInput.contains("my"))
-      {
-        response = userInput.replaceFirst("my", "your");
-      }
-      else if (userInput.contains("your"))
-      {
-        response = userInput.replaceFirst("your", "my");
-      }
-      else
-      {
-        int randomIndex = random.nextInt(cannedPhrases.length);
-        response = cannedPhrases[randomIndex];
-      }
-
-
-      System.out.println(response.substring(0, response.length() - 1) + "?");
-      transcript[nextIndex] = userInput;
-      nextIndex++;
-      transcript[nextIndex] = response.substring(0, response.length() - 1) + "?";
-      nextIndex++;
-
+        return response;
     }
 
-    System.out.println("Goodbye! Here is a transcript of our conversation:");
-    for (int n = 0 ; n < transcript.length; n++) 
-    {
-      System.out.println(transcript[n]);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        String conversation = "";
+
+        System.out.print("Choose a number of rounds of conversation.\n");
+        int rounds = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Hi there! What's on your mind?");
+        conversation += "Hi there! What's on your mind?\n";
+
+        for (int i = 0; i < rounds; i++) {
+            String input = scanner.nextLine();
+            conversation += input + "\n";
+
+            String response = getResponse(input);
+            if (response.endsWith("?")) {
+                System.out.println(response);
+                conversation += response + "\n";
+            } else {
+                int index = random.nextInt(cannedPhrases.length);
+                System.out.println(cannedPhrases[index]);
+                conversation += cannedPhrases[index] + "\n";
+            }
+        }
+
+        System.out.println("Goodbye! Here is a transcript of our conversation:\n==========\nTRANSCRIPT\n==========\n" + conversation);
     }
-    input.close();
-  }
 }
