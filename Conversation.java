@@ -13,8 +13,7 @@ public class Conversation {
     };
 
     private static String getResponse(String input) {
-        String response = input;
-        response = response.replace("i am", "You are");
+        String response = input.replace("i am", "You are");
         response = response.replace("I am", "You are");
         response = response.replace("i'm", "You're");
         response = response.replace("I'm", "You're");
