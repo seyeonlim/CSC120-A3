@@ -40,7 +40,7 @@ public class Conversation {
         
         
         /* Adding a question mark to response when the response isn't a canned phrase */
-        if (response.contains("You're") || response.contains("You are") || response.contains("I") || response.contains("your") || response.contains("my")) {
+        if (response.contains("You're") || response.contains("You are") || response.contains("I") || response.contains("your") || response.contains("my") || response.contains("you") || response.contains("me") ) {
             response = response.substring(0, response.length() - 1) + "?";
         }
 
