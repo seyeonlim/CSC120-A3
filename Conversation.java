@@ -56,7 +56,7 @@ public class Conversation {
 
         /* Asks user for number of rounds and scans the input */
         System.out.print("Choose a number of rounds of conversation.\n");
-        int rounds = scanner.nextInt();
+        int numOfRounds = scanner.nextInt();
         scanner.nextLine();
 
         /* Printing a greeting message and adding that to conversation */
@@ -64,7 +64,7 @@ public class Conversation {
         conversation += "Hi there! What's on your mind?\n";
 
         /* for statement to make the conversation run only for a given number of rounds */
-        for (int i = 0; i < rounds; i++) {
+        for (int i = 0; i < numOfRounds; i++) {
             String input = scanner.nextLine();
             conversation += input + "\n";
 
