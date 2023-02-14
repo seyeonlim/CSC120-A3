@@ -1,4 +1,4 @@
-/*
+/**
  * Course: CSC 120 (section 2)
  * Author: Seyeon Lim
  * Date: February 14, 2023
